@@ -13,8 +13,10 @@ make3D <- function(pdb){
   og.files <- get.pdb(pdbc) #query for the pdb files
   
   files <- pdbsplit(og.files, pdbc) # Extract and align the chains we are interested in
-  pdbs <- pdbaln(files, web.arg=list(email="tmc4503@g.rit.edu"))
+  files
+  pdbs <- pdbaln(files, web.arg=list(email="insert email here"))
   
+  print("reached here!")
   pdbs$id <- basename.pdb(pdbs$id)  # Calculate sequence identity
   seqidentity(pdbs)
   
@@ -22,7 +24,7 @@ make3D <- function(pdb){
   
   pc <- pca(pdbfit(pdbs), rm.gaps=TRUE) #plot a PCA (principal component analysis) for the proteins
   plot(pc)
-  
+  print("reached here 2")
   modes <- nma(pdbs)  #a quick NMA (normal mode analysis for the proteins)
   plot(modes, pdbs, spread=TRUE)
   
@@ -33,21 +35,25 @@ make3D <- function(pdb){
   b <- read.pdb(pdb2)
   c <- read.pdb(pdb3)
   
+  print("reached here 3")
   # perform iterative alignment
-  aln <- struct.aln(a, b)
-  aln2 <- strucvt.aln(b, c)
-  aln3 <- struct.aln(c, a)
-  
+  aln <- struct.aln(a, b,web.arg=list(email="insert email here"))
+  aln2 <- struct.aln(b, c,web.arg=list(email="insert email here"))
+  aln3 <- struct.aln(c, a,web.arg=list(email="insert email here"))
+  print("reached here 4")
   # store new coordinates of protein B
   b$xyz <- aln$xyz
   c$xyz <- aln2$xyz
   a$ayz <- aln3$xyz
-  
+  print("reached here 5")
   # indices at which the superposition should be based
   a.ind <- atom.select(a, chain="A", elety="CA")
   b.ind <- atom.select(b, chain="A", elety="CA")
   c.ind <- atom.select(c, chain="A", elety="CA")
-  
+  print("reached here 6")
+  cat(length(a.ind))
+  cat(length(b.ind))
+  cat(length(c.ind))
   # perform superposition
   xyzS1 <- fit.xyz(fixed=a$xyz, mobile=b$xyz, fixed.inds=a.ind$xyz, mobile.inds=b.ind$xyz)
   xyzS2 <- fit.xyz(fixed=b$xyz, mobile=c$xyz, fixed.inds=b.ind$xyz, mobile.inds=c.ind$xyz)
@@ -159,3 +165,6 @@ make3D <- function(pdb){
   flucts3
   
 }
+
+pdb <- c("1kju","4bew","4fvw")
+make3D(pdb)
