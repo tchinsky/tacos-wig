@@ -60,7 +60,7 @@ PCA <- function(pdb){
   
   ##Extract and align the chains
   files<-pdbsplit(raw.files,pdb)
-  pdbs<-pdbaln(files,web.arg=list(email="tmc4503@g.rit.edu"))
+  pdbs<-pdbaln(files,web.arg=list(email="insert email"))
   pdbs
   
   ##Calculate the sequence identity
@@ -93,9 +93,9 @@ PCA <- function(pdb){
   files.msa2<-get.pdb(hits2, path = "raw_pdbs",split = TRUE)
   files.msa3<-get.pdb(hits3, path = "raw_pdbs",split = TRUE)
   
-  pdbs.msa1<-pdbaln(files.msa1,web.arg=list(email="tmc4503@g.rit.edu"))
-  pdbs.msa2<-pdbaln(files.msa2,web.arg=list(email="tmc4503@g.rit.edu"))
-  pdbs.msa3<-pdbaln(files.msa3,web.arg=list(email="tmc4503@g.rit.edu"))
+  pdbs.msa1<-pdbaln(files.msa1,web.arg=list(email="insert email"))
+  pdbs.msa2<-pdbaln(files.msa2,web.arg=list(email="insert email"))
+  pdbs.msa3<-pdbaln(files.msa3,web.arg=list(email="insert email"))
   
   
   
