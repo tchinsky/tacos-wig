@@ -157,5 +157,5 @@ PCA <- function(pdb){
 }
 
 pdb<-c("4zlj","5or1","4g6u")
-#NMA(pdb)
+NMA(pdb)
 PCA(pdb)
